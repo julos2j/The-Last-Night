@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Last Night — Backyard Ultra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #e8192c;
+      --red-dark: #a50f1e;
+      --red-glow: rgba(232, 25, 44, 0.35);
+      --night: #060a14;
+      --night2: #0d1525;
+      --night3: #111b30;
+      --white: #f0eee8;
+      --muted: rgba(240, 238, 232, 0.5);
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Barlow Condensed', sans-serif;
+      --font-text: 'Barlow', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--night);
+      color: var(--white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(to bottom, rgba(6,10,20,0.95), transparent);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.12em;
+      color: var(--red);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--red); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 6rem 2rem 4rem;
+    }
+
+    /* Star field */
+    .stars {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 25%, rgba(255,255,255,0.9) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 10%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 45%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 62% 52%, rgba(255,255,255,0.9) 0%, transparent 100%),
+        radial-gradient(1px 1px at 33% 38%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 47% 72%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 5% 48%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 92% 88%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 20% 5%, rgba(255,255,255,0.9) 0%, transparent 100%);
+      background-color: transparent;
+    }
+
+    /* Mountain silhouette */
+    .mountain-bg {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 55%;
+      background: linear-gradient(
+        to top,
+        #060a14 0%,
+        #0a1020 30%,
+        transparent 100%
+      );
+    }
+
+    .mountain-bg::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 400'%3E%3Cpath fill='%230a1020' d='M0,400 L0,300 L80,250 L160,280 L240,200 L320,230 L400,150 L480,180 L560,100 L640,130 L720,60 L800,100 L880,180 L960,140 L1040,200 L1120,170 L1200,240 L1280,210 L1360,270 L1440,250 L1440,400 Z'/%3E%3Cpath fill='%23060a14' d='M0,400 L0,340 L120,310 L200,330 L280,280 L360,300 L440,260 L520,285 L600,240 L680,265 L760,220 L840,245 L920,290 L1000,270 L1080,310 L1160,290 L1240,330 L1320,310 L1440,340 L1440,400 Z'/%3E%3C/svg%3E") no-repeat bottom center / cover;
+    }
+
+    /* Atmospheric glow */
+    .hero-glow {
+      position: absolute;
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(20, 40, 100, 0.4) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .red-line-top, .red-line-bottom {
+      position: absolute;
+      left: 3rem; right: 3rem;
+      height: 2px;
+      background: var(--red);
+    }
+    .red-line-top { top: 5rem; }
+    .red-line-bottom { bottom: 4rem; }
+
+    .red-line-top::before, .red-line-top::after,
+    .red-line-bottom::before, .red-line-bottom::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 14px;
+      background: var(--red);
+    }
+    .red-line-top::before { top: 0; left: 0; }
+    .red-line-top::after { top: 0; right: 0; }
+    .red-line-bottom::before { bottom: 0; left: 0; }
+    .red-line-bottom::after { bottom: 0; right: 0; }
+
+    .hero-meta {
+      position: relative;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.25em;
+      color: var(--white);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.3s;
+    }
+
+    .hero-title {
+      position: relative;
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 18vw, 16rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: var(--red);
+      text-shadow:
+        0 0 60px rgba(232, 25, 44, 0.4),
+        0 0 120px rgba(232, 25, 44, 0.2);
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.5s;
+    }
+
+    .hero-sub {
+      position: relative;
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+      letter-spacing: 0.18em;
+      color: var(--white);
+      margin-top: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+
+    .hero-tagline {
+      position: relative;
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.1s;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.5s;
+    }
+
+    .scroll-indicator span {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--red), transparent);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50% { opacity: 0.4; transform: scaleY(0.7); }
+    }
+
+    /* ── COUNTDOWN ── */
+    #countdown {
+      background: var(--night2);
+      border-top: 1px solid rgba(232,25,44,0.2);
+      border-bottom: 1px solid rgba(232,25,44,0.2);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .countdown-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2rem;
+    }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    .countdown-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 120px;
+      padding: 1rem 2rem;
+      position: relative;
+    }
+
+    .countdown-unit + .countdown-unit::before {
+      content: ':';
+      position: absolute;
+      left: -2px;
+      top: 50%;
+      transform: translateY(-60%);
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      color: var(--red);
+      opacity: 0.4;
+    }
+
+    .countdown-num {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5rem);
+      line-height: 1;
+      color: var(--white);
+      text-shadow: 0 0 30px var(--red-glow);
+    }
+
+    .countdown-name {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 2rem; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      line-height: 0.92;
+      color: var(--white);
+      margin-bottom: 2.5rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--red);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── INFOS ── */
+    #infos { background: var(--night); }
+
+    .infos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1px;
+      background: rgba(232,25,44,0.15);
+      border: 1px solid rgba(232,25,44,0.15);
+    }
+
+    .info-card {
+      background: var(--night2);
+      padding: 2.5rem;
+      transition: background 0.3s;
+    }
+
+    .info-card:hover { background: var(--night3); }
+
+    .info-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-label {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-value {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      line-height: 1.1;
+      color: var(--white);
+    }
+
+    .info-detail {
+      font-family: var(--font-text);
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      line-height: 1.5;
+    }
+
+    /* ── FORMAT ── */
+    #format { background: var(--night2); }
+
+    .format-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .format-text p {
+      font-family: var(--font-text);
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(240,238,232,0.75);
+      margin-bottom: 1.2rem;
+    }
+
+    .format-text p strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .loop-visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .loop-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      background: rgba(232,25,44,0.05);
+      border-left: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .loop-row:hover {
+      background: rgba(232,25,44,0.1);
+      border-left-color: var(--red);
+    }
+
+    .loop-row:nth-child(1) { border-left-color: var(--red); }
+
+    .loop-num {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: rgba(232,25,44,0.4);
+      min-width: 2.5rem;
+    }
+
+    .loop-info {
+      flex: 1;
+    }
+
+    .loop-time {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--white);
+    }
+
+    .loop-dist {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+    }
+
+    .loop-badge {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--red);
+      color: var(--red);
+    }
+
+    .loop-dots {
+      text-align: center;
+      padding: 1rem;
+      color: rgba(232,25,44,0.3);
+      font-size: 1.5rem;
+      letter-spacing: 0.4em;
+    }
+
+    /* ── REGLES ── */
+    #regles { background: var(--night); }
+
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .rule-card {
+      padding: 2rem;
+      border: 1px solid rgba(240,238,232,0.06);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .rule-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--red);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.3s;
+    }
+
+    .rule-card:hover { border-color: rgba(232,25,44,0.3); }
+    .rule-card:hover::before { transform: scaleY(1); }
+
+    .rule-number {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: rgba(232,25,44,0.12);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .rule-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+
+    .rule-desc {
+      font-family: var(--font-text);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(240,238,232,0.65);
+    }
+
+    /* ── INSCRIPTION ── */
+    #inscription {
+      background: var(--night2);
+      text-align: center;
+    }
+
+    .inscription-box {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 4rem;
+      border: 1px solid rgba(232,25,44,0.2);
+      position: relative;
+    }
+
+    .inscription-box::before, .inscription-box::after {
+      content: '';
+      position: absolute;
+      width: 30px; height: 30px;
+    }
+    .inscription-box::before {
+      top: -1px; left: -1px;
+      border-top: 2px solid var(--red);
+      border-left: 2px solid var(--red);
+    }
+    .inscription-box::after {
+      bottom: -1px; right: -1px;
+      border-bottom: 2px solid var(--red);
+      border-right: 2px solid var(--red);
+    }
+
+    .inscription-title {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .inscription-text {
+      font-family: var(--font-text);
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-inscription {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      letter-spacing: 0.2em;
+      color: var(--night);
+      background: var(--red);
+      padding: 1rem 3rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      cursor: not-allowed;
+      opacity: 0.6;
+      position: relative;
+    }
+
+    .btn-inscription.active {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    .btn-inscription.active:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--red-glow);
+    }
+
+    .soon-badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid rgba(232,25,44,0.4);
+      padding: 0.3rem 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── ORGANISATEURS ── */
+    #organisateurs { background: var(--night); }
+
+    .orgas-layout {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .orga-card {
+      flex: 1;
+      min-width: 240px;
+      max-width: 340px;
+      padding: 2.5rem;
+      border: 1px solid rgba(240,238,232,0.07);
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .orga-card:hover {
+      border-color: rgba(232,25,44,0.3);
+      transform: translateY(-4px);
+    }
+
+    .orga-icon {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: rgba(232,25,44,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin: 0 auto 1.5rem;
+      border: 1px solid rgba(232,25,44,0.25);
+    }
+
+    .orga-name {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .orga-desc {
+      font-family: var(--font-text);
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .orga-contact {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(232,25,44,0.5);
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--night);
+      border-top: 1px solid rgba(240,238,232,0.06);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--red);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-date {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links a {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--red); }
+
+    .footer-copy {
+      font-family: var(--font-text);
+      font-size: 0.75rem;
+      color: rgba(240,238,232,0.2);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .format-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .countdown-unit { min-width: 80px; padding: 1rem; }
+      .inscription-box { padding: 2.5rem 1.5rem; }
+      section { padding: 4rem 1.5rem; }
+      .red-line-top, .red-line-bottom { left: 1.5rem; right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">THE LAST NIGHT</a>
+    <ul class="nav-links">
+      <li><a href="#infos">Infos</a></li>
+      <li><a href="#format">Format</a></li>
+      <li><a href="#regles">Règles</a></li>
+      <li><a href="#inscription">Inscription</a></li>
+      <li><a href="#organisateurs">Organisateurs</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="stars"></div>
+    <div class="mountain-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="red-line-top"></div>
+    <div class="red-line-bottom"></div>
+
+    <p class="hero-meta">23 JANVIER 2027 — TEULAT (81)</p>
+    <h1 class="hero-title">THE<br>LAST<br>NIGHT</h1>
+    <p class="hero-sub">BACKYARD ULTRA — PREMIÈRE ÉDITION</p>
+    <p class="hero-tagline">Qui ira jusqu'au bout&nbsp;?</p>
+
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <div id="countdown">
+    <p class="countdown-label">Compte à rebours avant le départ</p>
+    <div class="countdown-grid">
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-days">—</span>
+        <span class="countdown-name">Jours</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-hours">—</span>
+        <span class="countdown-name">Heures</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-mins">—</span>
+        <span class="countdown-name">Minutes</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-secs">—</span>
+        <span class="countdown-name">Secondes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFOS -->
+  <section id="infos">
+    <div class="section-inner">
+      <p class="section-eyebrow reveal">Informations</p>
+      <h2 class="section-title reveal">L'ESSENTIEL</h2>
+      <div class="infos-grid reveal">
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <p class="info-label">Lieu</p>
+          <p class="info-value">Teulat</p>
+          <p class="info-detail">Tarn (81) — Occitanie</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🗓️</div>
+          <p class="info-label">Date</p>
+          <p class="info-value">23 JANV. 2027</p>
+          <p class="info-detail">Samedi — Départ à 16h00</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🔁</div>
+          <p class="info-label">Boucle</p>
+          <p class="info-value">7,4 KM</p>
+          <p class="info-detail">150D+ — Toutes les heures</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">👥</div>
+          <p class="info-label">Participants</p>
+          <p class="info-value">400</p>
+          <p class="info-detail">Dossards disponibles</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">⏱️</div>
+          <p class="info-label">Fin au plus tard</p>
+          <p class="info-value">06h00</p>
+          <p class="info-detail">Dimanche 24 janvier 2027</p>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🏔️</div>
+          <p class="info-label">Terrain</p>
+          <p class="info-value">TECHNIQUE</p>
+          <p class="info-detail">Parcours varié et exigeant</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAT -->
+  <section id="format">
+    <div class="section-inner">
+      <div class="format-layout">
+        <div class="format-text">
+          <p class="section-eyebrow reveal">Le concept</p>
+          <h2 class="section-title reveal">COMMENT ÇA<br>FONCTIONNE</h2>
+          <div class="divider reveal"></div>
+          <p class="reveal">Le <strong>Backyard Ultra</strong> est l'épreuve d'endurance la plus mentalement éprouvante qui soit. Pas de distance fixe. Pas de chronométrage individuel. Une seule règle : <strong>être sur la ligne de départ toutes les heures.</strong></p>
+          <p class="reveal">Chaque boucle fait <strong>7,4 km avec 150 mètres de dénivelé positif</strong>. Le départ est donné à 16h00 le samedi. Tu as 60 minutes pour compléter chaque tour.</p>
+          <p class="reveal">L'épreuve continue jusqu'à ce qu'il ne reste <strong>qu'un seul coureur encore debout</strong>. Le dernier à courir une boucle de plus que tous les autres est le vainqueur — ou jusqu'à 6h00 le dimanche matin.</p>
+          <p class="reveal">Le terrain est <strong>varié et technique</strong>. La nuit, le froid et la fatigue feront partie de l'aventure. La question n'est pas de courir vite. La question est : <strong>jusqu'où iras-tu ?</strong></p>
+        </div>
+        <div>
+          <div class="loop-visual reveal">
+            <div class="loop-row">
+              <span class="loop-num">01</span>
+              <div class="loop-info">
+                <p class="loop-time">16h00 — Départ</p>
+                <p class="loop-dist">7,4 km · 150D+</p>
+              </div>
+              <span class="loop-badge">START</span>
+            </div>
+            <div class="loop-row">
+              <span class="loop-num">02</span>
+              <div class="loop-info">
+                <p class="loop-time">17h00</p>
+                <p class="loop-dist">7,4 km · 150D+</p>
+              </div>
+            </div>
+            <div class="loop-row">
+              <span class="loop-num">03</span>
+              <div class="loop-info">
+                <p class="loop-time">18h00</p>
+                <p class="loop-dist">7,4 km · 150D+</p>
+              </div>
+            </div>
+            <div class="loop-row">
+              <span class="loop-num">04</span>
+              <div class="loop-info">
+                <p class="loop-time">19h00</p>
+                <p class="loop-dist">7,4 km · 150D+</p>
+              </div>
+            </div>
+            <div class="loop-dots">· · ·</div>
+            <div class="loop-row">
+              <span class="loop-num">??</span>
+              <div class="loop-info">
+                <p class="loop-time">Jusqu'au dernier</p>
+                <p class="loop-dist">max 14 boucles · fin 06h00</p>
+              </div>
+              <span class="loop-badge" style="border-color: var(--white); color: var(--white);">FIN</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGLES -->
+  <section id="regles">
+    <div class="section-inner">
+      <p class="section-eyebrow reveal">Le règlement</p>
+      <h2 class="section-title reveal">LES RÈGLES</h2>
+      <div class="rules-grid">
+        <div class="rule-card reveal">
+          <p class="rule-number">01</p>
+          <p class="rule-title">UNE BOUCLE PAR HEURE</p>
+          <p class="rule-desc">Chaque boucle de 7,4 km doit être complétée en moins d'une heure. Le départ suivant est donné à l'heure pile, qu'importe quand tu as terminé la précédente.</p>
+        </div>
+        <div class="rule-card reveal">
+          <p class="rule-number">02</p>
+          <p class="rule-title">ÊTRE SUR LA LIGNE</p>
+          <p class="rule-desc">Si tu n'es pas au départ lorsque la boucle suivante est lancée, tu es éliminé. Pas d'exception, pas de rattrapage. Être là, c'est continuer.</p>
+        </div>
+        <div class="rule-card reveal">
+          <p class="rule-number">03</p>
+          <p class="rule-title">DÉPART À 16H00</p>
+          <p class="rule-desc">La course débute le samedi 23 janvier à 16h00 précises. L'heure de fin maximale est fixée au dimanche 24 janvier à 6h00.</p>
+        </div>
+        <div class="rule-card reveal">
+          <p class="rule-number">04</p>
+          <p class="rule-title">TERRAIN TECHNIQUE</p>
+          <p class="rule-desc">Le parcours est exigeant et varié. Préparation spécifique recommandée. Le dénivelé cumulé par boucle est de 150 mètres de positif.</p>
+        </div>
+        <div class="rule-card reveal">
+          <p class="rule-number">05</p>
+          <p class="rule-title">400 COUREURS</p>
+          <p class="rule-desc">La course accueille 400 participants pour cette première édition. Seul le dernier debout — ou les derniers encore en course — sera victorieux.</p>
+        </div>
+        <div class="rule-card reveal">
+          <p class="rule-number">06</p>
+          <p class="rule-title">RÈGLEMENT COMPLET</p>
+          <p class="rule-desc">Le règlement complet de la course sera communiqué prochainement. Restez informés via les canaux officiels des organisateurs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSCRIPTION -->
+  <section id="inscription">
+    <div class="section-inner">
+      <div class="inscription-box reveal">
+        <span class="soon-badge">Bientôt disponible</span>
+        <h2 class="inscription-title">REJOINS LA COURSE</h2>
+        <p class="inscription-text">
+          Les inscriptions pour The Last Night ouvriront prochainement sur la plateforme Chrono-Start.<br>
+          Tarifs et modalités à venir. Sois prêt — les 400 dossards partiront vite.
+        </p>
+        <a class="btn-inscription" href="#" onclick="return false;" title="Inscriptions bientôt disponibles">
+          INSCRIPTIONS BIENTÔT
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORGANISATEURS -->
+  <section id="organisateurs">
+    <div class="section-inner">
+      <p class="section-eyebrow reveal">Derrière l'événement</p>
+      <h2 class="section-title reveal">LES ORGANISATEURS</h2>
+      <div class="orgas-layout">
+        <div class="orga-card reveal">
+          <div class="orga-icon">🌍</div>
+          <p class="orga-name">PLANÈTE TRAIL</p>
+          <p class="orga-desc">Organisation d'épreuves de trail et de course nature, engagée pour des événements exigeants et inoubliables.</p>
+          <span class="orga-contact">Contact à venir</span>
+        </div>
+        <div class="orga-card reveal">
+          <div class="orga-icon">⚡</div>
+          <p class="orga-name">2J PERFORMANCE</p>
+          <p class="orga-desc">Structure spécialisée dans la performance sportive et l'organisation d'événements trail de haut niveau.</p>
+          <span class="orga-contact">Contact à venir</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-title">THE LAST NIGHT</p>
+    <p class="footer-date">23 Janvier 2027 — Teulat, Tarn (81)</p>
+    <ul class="footer-links">
+      <li><a href="#infos">Infos</a></li>
+      <li><a href="#format">Format</a></li>
+      <li><a href="#regles">Règles</a></li>
+      <li><a href="#inscription">Inscription</a></li>
+      <li><a href="#organisateurs">Organisateurs</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 The Last Night — Planète Trail & 2J Performance. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    // Countdown
+    function updateCountdown() {
+      const target = new Date('2027-01-23T16:00:00');
+      const now = new Date();
+      const diff = target - now;
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '00';
+        document.getElementById('cd-hours').textContent = '00';
+        document.getElementById('cd-mins').textContent = '00';
+        document.getElementById('cd-secs').textContent = '00';
+        return;
+      }
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const secs = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+      document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Nav active
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      nav.style.background = window.scrollY > 50
+        ? 'rgba(6,10,20,0.97)'
+        : 'linear-gradient(to bottom, rgba(6,10,20,0.95), transparent)';
+    });
+  </script>
+</body>
+</html>
