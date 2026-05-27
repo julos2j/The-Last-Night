@@ -774,6 +774,7 @@
       <li><a href="#regles">Règles</a></li>
       <li><a href="https://chrono-start.fr/Inscription/Course/detail/c/5176" target="_blank">Inscription</a></li>
       <li><a href="#organisateurs">Organisateurs</a></li>
+      <li><a href="#contact">Contact</a></li>
       <li><a href="https://www.instagram.com/thelastnighttrail/" target="_blank" title="Instagram" style="display:flex;align-items:center;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></li>
     </ul>
   </nav>
@@ -1002,7 +1003,7 @@
           <a href="https://www.instagram.com/thelastnighttrail/" target="_blank" style="text-decoration:none;">
             <p style="font-family:var(--font-display);font-size:1.3rem;color:var(--white);letter-spacing:0.05em;margin-bottom:0.3rem;">@thelastnighttrail</p>
           </a>
-          <p style="font-family:var(--font-text);font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem;">Backyard Ultra · 23 janv. 2027 · Teulat</p>
+          <p style="font-family:var(--font-text);font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem;">23 janv. 2027 · Teulat</p>
           <a href="https://www.instagram.com/thelastnighttrail/" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-body);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--night);background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);padding:0.6rem 1.4rem;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
             Suivre
@@ -1023,7 +1024,7 @@
           <div style="padding:1.2rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;">
             <div>
               <p style="font-family:var(--font-display);font-size:1.1rem;color:var(--white);margin-bottom:0.2rem;">TRAILER OFFICIEL</p>
-              <p style="font-family:var(--font-text);font-size:0.8rem;color:var(--muted);">The Last Night · Backyard Ultra 2027</p>
+              <p style="font-family:var(--font-text);font-size:0.8rem;color:var(--muted);">The Last Night · 2027</p>
             </div>
             <a href="https://www.instagram.com/p/DX6qVvHK4-1/" target="_blank" style="flex-shrink:0;display:inline-flex;align-items:center;gap:0.4rem;font-family:var(--font-body);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--red);border:1px solid rgba(232,25,44,0.4);padding:0.45rem 0.9rem;text-decoration:none;transition:all 0.2s;white-space:nowrap;" onmouseover="this.style.background='rgba(232,25,44,0.1)'" onmouseout="this.style.background='transparent'">
               Voir sur Instagram →
@@ -1055,6 +1056,42 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section id="contact" style="background:var(--night);">
+    <div class="section-inner">
+      <p class="section-eyebrow reveal">Une question ?</p>
+      <h2 class="section-title reveal">NOUS CONTACTER</h2>
+      <div class="divider reveal"></div>
+      <div class="reveal" style="max-width:620px;">
+        <p style="font-family:var(--font-text);font-size:0.95rem;color:rgba(240,238,232,0.65);line-height:1.8;margin-bottom:2.5rem;">Tu as une question sur la course, le parcours, les inscriptions ou la logistique ? Remplis le formulaire ci-dessous, nous te répondrons dans les plus brefs délais.</p>
+        <form action="https://formspree.io/f/xgoqrebw" method="POST" id="contact-form" style="display:flex;flex-direction:column;gap:1.2rem;">
+          <div style="display:flex;gap:1.2rem;flex-wrap:wrap;">
+            <div style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:0.4rem;">
+              <label style="font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);">Prénom & Nom</label>
+              <input type="text" name="name" required placeholder="Jean Dupont" style="background:var(--night2);border:1px solid rgba(240,238,232,0.1);color:var(--white);font-family:var(--font-text);font-size:0.9rem;padding:0.85rem 1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='rgba(232,25,44,0.5)'" onblur="this.style.borderColor='rgba(240,238,232,0.1)'" />
+            </div>
+            <div style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:0.4rem;">
+              <label style="font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);">Adresse e-mail</label>
+              <input type="email" name="email" required placeholder="jean@exemple.fr" style="background:var(--night2);border:1px solid rgba(240,238,232,0.1);color:var(--white);font-family:var(--font-text);font-size:0.9rem;padding:0.85rem 1rem;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='rgba(232,25,44,0.5)'" onblur="this.style.borderColor='rgba(240,238,232,0.1)'" />
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;">
+            <label style="font-family:var(--font-body);font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--red);">Votre question</label>
+            <textarea name="message" required rows="5" placeholder="Écris ta question ici..." style="background:var(--night2);border:1px solid rgba(240,238,232,0.1);color:var(--white);font-family:var(--font-text);font-size:0.9rem;padding:0.85rem 1rem;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='rgba(232,25,44,0.5)'" onblur="this.style.borderColor='rgba(240,238,232,0.1)'"></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="Nouvelle question — The Last Night" />
+          <div>
+            <button type="submit" style="font-family:var(--font-display);font-size:1.1rem;letter-spacing:0.2em;color:var(--night);background:var(--red);border:none;padding:0.9rem 2.5rem;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.background='#a50f1e';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--red)';this.style.transform='none'">ENVOYER</button>
+          </div>
+        </form>
+        <div id="contact-success" style="display:none;margin-top:1.5rem;padding:1.2rem 1.5rem;border:1px solid rgba(232,25,44,0.4);background:rgba(232,25,44,0.07);">
+          <p style="font-family:var(--font-display);font-size:1.2rem;color:var(--white);margin-bottom:0.3rem;">MESSAGE ENVOYÉ !</p>
+          <p style="font-family:var(--font-text);font-size:0.85rem;color:var(--muted);">Merci pour ta question, nous te répondrons très bientôt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <p class="footer-title">THE LAST NIGHT</p>
@@ -1065,10 +1102,41 @@
       <li><a href="#regles">Règles</a></li>
       <li><a href="https://chrono-start.fr/Inscription/Course/detail/c/5176" target="_blank">Inscription</a></li>
       <li><a href="#organisateurs">Organisateurs</a></li>
+      <li><a href="#contact">Contact</a></li>
       <li><a href="https://www.instagram.com/thelastnighttrail/" target="_blank">Instagram</a></li>
     </ul>
     <p class="footer-copy">© 2026 The Last Night — Planète Trail & 2J Performance. Tous droits réservés.</p>
   </footer>
+
+  <script>
+    // Contact form AJAX submission
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        btn.textContent = 'ENVOI EN COURS...';
+        btn.disabled = true;
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            form.style.display = 'none';
+            document.getElementById('contact-success').style.display = 'block';
+          } else {
+            btn.textContent = 'ERREUR — RÉESSAYER';
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = 'ERREUR — RÉESSAYER';
+          btn.disabled = false;
+        }
+      });
+    }
+  </script>
 
   <script>
     // Countdown
